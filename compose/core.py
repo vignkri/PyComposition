@@ -17,13 +17,18 @@ def render_template():
     #TODO: Flexible file system loader for custom templates
     env = Environment(loader=FileSystemLoader("."),)
 
-    # Custom commands go here
+    # Get css path as a custom path
+    css_location = "./static/styles.css"
+    full_css_path = os.path.realpath(css_location)
+
+    # Custom data goes here
     doc_title = "Sample Report"
     
     # TODO: Flexible template location or type
     template = env.get_template("./templates/report.html")
     rendered = template.render(
         title=doc_title,
+        stylesheet_url=full_css_path,
     )
     return rendered.encode("utf-8")
 
